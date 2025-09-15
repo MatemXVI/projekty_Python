@@ -11,3 +11,5 @@ system_oceniania_uczniow.py -  po podaniu ocen uczniów wyświetla się lista uc
 obliczanie_silni_i_potegi.py - Program obliczane silnie i potegę z danej liczby/liczb, można odczytać historię wyników z pamięci
 
 wielkanoc.py - obliczanie dat wielkanocy dla podanego roku w kalendarzu juliańskim i gregoriańskim
+
+palindrom.py - sprawdza czy podane zdanie albo słowo jest palindromem, tzn. czy zdanie od początku do końca ma takie same litery co od końca do początku, np. "Kobyła ma mały bok"
