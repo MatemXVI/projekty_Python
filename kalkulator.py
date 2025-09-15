@@ -3,8 +3,11 @@ import os
 print("--------- KALKULATOR ------------")
 
 def read_operations():
-    filename = input("Podaj nazwę pliku(plik może być wyłącznie z rozszerzeniem .txt): ")
     operations = []
+    filename = input("Podaj nazwę pliku(plik może być wyłącznie z rozszerzeniem .txt): ")
+    if not filename.endswith(".txt"):
+        print("Plik musi mieć rozszerzenie .txt!")
+        return operations
     try:
         with open(filename, "r") as file:
             lines = file.readlines()
@@ -20,19 +23,19 @@ def read_operations():
 
 def write_operations(lines):
     filename = input("Podaj nazwę(z rozszerzeniem .txt) : ")
-    if filename[-4:] != ".txt":
+    if not filename.endswith(".txt"):
         print("Plik musi mieć rozszerzenie .txt!")
         return
     if os.path.exists(filename):
-        option = input("Plik już istnieje! Czy chcesz zapisać do tego pliku (T)")
+        option = input("Plik już istnieje! Czy chcesz zapisać do tego pliku [T]?")
         if option.lower() != 't':
             return
     with open(filename, "w") as file:
         for line in lines:
             file.write(line + "\n")
-    return True;
+    return True
 
-option = input("Czy chcesz wczytać dane z pliku? Naciśnij T jezeli chcesz to zrobić lub dowolny klawisz aby przejść do wykonywania działań: ")
+option = input("Czy chcesz wczytać dane z pliku? Naciśnij [T] aby wczytać lub [Enter] aby przejść do wykonywania działań: ")
 if option.lower() == 't':
     operations = read_operations().copy()
 else:
@@ -68,22 +71,22 @@ while True:
     operation += " = " + str(result)
     operations.append(operation)
     print("Wynik działania " + operation)
-    option = input("Jeżeli chcesz wyjść z programu naciśnij T bądź inny klawisz jeśli chcesz zostać. Jeżeli chcesz wyświetlić listę działan naciśnij 0 ")
+    option = input("Jeżeli chcesz wyjść z programu naciśnij [T]. Jeżeli chcesz wyświetlić listę działan i zapisać je do pliku naciśnij [0]. Aby wykonać nowe działanie naciśnij [Enter]. ")
     if option.lower() == 't':
         print("Trwa wychodzenie z programu...")
-        quit()
+        break
     elif option == '0':
         print("Lista wykonanych działań: ")
         for operation in operations:
             print(operation)
-        option = input("Czy chcesz zapisać wyniki do pliku? Naciśnij T jeżeli chcesz to zrobić. Naciśnij 0 jeżei chcesz wyjść z programu. Naciśnij dowolny klawisz jeżeli chcesz kontynuować ")
+        option = input("Czy chcesz zapisać wyniki do pliku? Naciśnij [T] aby to zrobić. Naciśnij [0] jeżeli chcesz wyjść z programu. Naciśnij [Enter] aby wykonać nowe działanie.")
         if option.lower() == 't':
             if write_operations(operations):
                 print("Dane pomyślnie zapisano do pliku.")
-            option = input("Czy chcesz wyjść z programu(T)? ")
+            option = input("Czy chcesz wyjść z programu? Naciśnij [T] aby to zrobić ")
             if option.lower() == 't':
-                quit()
+                break
         elif option == '0':
-            quit()
+            break
         else:
             continue
